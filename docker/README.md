@@ -7,7 +7,9 @@ Run script
 docker compose -f docker-compose-dev.yaml up --build
 ```
 
-Checking result
+Checking result  
+
+Using ENV PASSWORD for command prompt
 
 ```bash
 cd output
