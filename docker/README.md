@@ -104,3 +104,25 @@ D3aMfdTh+LIbKYvZJ7yVQlQi1Rdw2VkW+UCo/fOvU2iYJH2FoicbyOwdDaJBFK1F
 u4+HcYlMp2vR+LKtc/X1ixD1Skzs1/lR
 -----END ENCRYPTED PRIVATE KEY-----
 ```
+
+# Debugging Mouting Volumes
+
+Uncomment in docker-compose-dev.yaml
+
+```yaml
+entrypoint: ["/bin/bash", "-c"]
+command: ["sleep infinity"]
+```
+
+Start docker compose
+
+```bash
+docker compose -f docker-compose-dev.yaml up  -d 
+```
+
+Should see tls.crt tls.key ca.crt in /certs
+```
+docker exec -it key2pfx-dev bash
+
+cd /certs
+```
