@@ -1,0 +1,18 @@
+services:
+  key2pfx:
+    container_name: key2pfx-dev
+    # entrypoint: ["/bin/bash", "-c"]
+    # command: ["sleep infinity"]
+    image: key2pfx:latest
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+    environment:
+      - CRT=/certs/tls.crt
+      - KEY=/certs/tls.key
+      - CA=/certs/ca.crt
+      - OUT=/output/cert-custom.pfx
+      - PASSWORD=enjoyworking
+    volumes:
+      - ./mock-certs:/certs
+      - ./ouput:/output
