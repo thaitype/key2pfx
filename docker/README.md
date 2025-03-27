@@ -4,7 +4,11 @@
 Run script
 
 ```bash
-docker compose -f docker-compose-dev.yaml up --build
+docker compose -f docker-compose-dev.yaml build --no-cache
+```
+
+```bash
+docker compose -f docker-compose-dev.yaml up
 ```
 
 Checking result  
@@ -13,8 +17,9 @@ Using ENV PASSWORD for command prompt
 
 ```bash
 cd output
-
-openssl pkcs12 -legacy -info -in cert-custom.pfx
+```
+```bash
+openssl pkcs12 -info -in cert-custom.pfx
 ```
 Example result  
 ```

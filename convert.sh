@@ -17,7 +17,6 @@ mkdir -p "$(dirname "$OUT")"
 
 # Convert to PFX
 openssl pkcs12 -export \
-  -legacy \
   -in "$CRT" \
   -inkey "$KEY" \
   -certfile "$CA" \
