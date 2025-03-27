@@ -1,6 +1,10 @@
 # Key2PFX
 
+[![Create and publish a Docker image](https://github.com/thaitype/key2pfx/actions/workflows/publish-image.yml/badge.svg?branch=latest)](https://github.com/thaitype/key2pfx/actions/workflows/publish-image.yml)
+
 **Key2PFX** is a lightweight Docker-based utility that securely converts TLS certificates (`tls.crt`, `tls.key`, `ca.crt`) from cert-manager or other certificate providers into a `.pfx` file, suitable for consumption by .NET applications.
+
+ > 🚧 This project is still in progress 
 
 ---
 
