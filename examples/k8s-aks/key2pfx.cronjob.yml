@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: key2pfx
+spec:
+  schedule: "0 0 * * *"  # runs every day at midnight
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        spec:
+          volumes:
+          - name: key-cert
+            secret:
+              secretName: key-cert
+          - name: key2pfx-v
+            persistentVolumeClaim:
+              claimName: key2pfx-pvc
+          containers:
+          - name: key2pfx
+            image: ghcr.io/thaitype/key2pfx:latest
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: PASSWORD
+                value: mypassword
+              - name: CRT
+                value: /certs/tls.crt
+              - name: KEY
+                value: /certs/tls.key
+              - name: CA
+                value: /certs/ca.crt
+              - name: OUT
+                value: /https/aspnetapp.pfx
+            volumeMounts:
+              - mountPath: /certs
+                name: key-cert
+                readOnly: true
+              - name: key2pfx-v
+                mountPath: /https/
+          restartPolicy: Never

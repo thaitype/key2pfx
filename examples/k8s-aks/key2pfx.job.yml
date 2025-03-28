@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: key2pfx
+spec:
+  template:
+    spec:
+      volumes:
+      - name: key-cert
+        secret:
+          secretName: key-cert
+      - name: key2pfx-v
+        persistentVolumeClaim:
+          claimName: key2pfx-pvc
+      containers:
+      - name: key2pfx
+        image: ghcr.io/thaitype/key2pfx:latest
+        env:
+          - name: PASSWORD
+            value: mypassword
+          - name: CRT
+            value: /certs/tls.crt
+          - name: KEY
+            value: /certs/tls.key
+          - name: CA
+            value: /certs/ca.crt
+          - name: OUT
+            value: /https/aspnetapp.pfx
+        volumeMounts:
+          - mountPath: /certs
+            name: key-cert
+            readOnly: true
+          - name: key2pfx-v
+            mountPath: /https/
+      restartPolicy: Never
+  backoffLimit: 4

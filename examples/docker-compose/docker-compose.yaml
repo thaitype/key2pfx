@@ -1,0 +1,14 @@
+services:
+  key2pfx:
+    # entrypoint: ["/bin/bash", "-c"]
+    # command: ["sleep infinity"]
+    image: ghcr.io/thaitype/key2pfx:latest
+    environment:
+      - CRT=/certs/tls.crt
+      - KEY=/certs/tls.key
+      - CA=/certs/ca.crt
+      - OUT=/output/cert-custom.pfx
+      - PASSWORD=enjoyworking
+    volumes:
+      - ./mock-certs:/certs
+      - ./ouput:/output
