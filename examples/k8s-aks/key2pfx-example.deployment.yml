@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  key2pfx-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  key2pfx-example
+  template:
+    metadata:
+      labels:
+        app:  key2pfx-example
+    spec:
+      containers:
+        - name:  key2pfx-example
+          command: ["sleep", "infinity"]
+          image: alpine:latest
+          resources:
+            requests:
+              memory: "125Mi"
+              cpu: "125m"
+            limits:
+              memory: "250Mi"
+              cpu: "250m"
+          securityContext:
+            runAsUser: 0
+          env:
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+              value: mypfxpassword
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+              value: /https/aspnetapp.pfx
+          volumeMounts:
+          - name: key2pfx-v
+            mountPath: /https/
+            readOnly: true
+      volumes:
+      - name: key2pfx-v
+        persistentVolumeClaim:
+          claimName: key2pfx-pvc
