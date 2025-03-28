@@ -7,6 +7,9 @@ services:
     build:
       context: ../
       dockerfile: ./Dockerfile
+      args:
+        ALPINE_VERSION: 3.21.3
+        OPENSSL_VERSION: 3.3.3-r0
     environment:
       - CRT=/certs/tls.crt
       - KEY=/certs/tls.key
