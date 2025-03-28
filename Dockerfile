@@ -1,7 +1,9 @@
-FROM alpine:3.21.3
+ARG ALPINE_VERSION=3.21.3
+FROM alpine:${ALPINE_VERSION}
 
 # Install openssl and bash for better scripting
-RUN apk add --no-cache openssl bash
+ARG OPENSSL_VERSION=3.3.3-r0
+RUN apk add --no-cache openssl=${OPENSSL_VERSION} bash
 
 # Set working directory
 WORKDIR /app
