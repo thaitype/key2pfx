@@ -49,3 +49,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
+          build-args: |
+            ALPINE_VERSION=3.21.3
+            OPENSSL_VERSION=3.3.3-r0
+          

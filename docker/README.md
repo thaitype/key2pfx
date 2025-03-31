@@ -131,3 +131,31 @@ docker exec -it key2pfx-dev bash
 
 cd /certs
 ```
+
+# Build with custom version  
+
+Docker compose
+
+```yaml
+key2pfx:
+    container_name: key2pfx-dev
+    # entrypoint: ["/bin/bash", "-c"]
+    # command: ["sleep infinity"]
+    image: key2pfx:latest
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+      args:
+        ALPINE_VERSION: 3.21.3
+        OPENSSL_VERSION: 3.3.3-r0
+```
+
+```bash
+docker compose -f docker-compose-dev.yaml build --no-cache
+```
+
+Docker
+
+```bash
+docker build --build-arg ALPINE_VERSION=3.21.3 --build-arg OPENSSL_VERSION=3.3.3-r0 -t key2pfx:dev .
+```
